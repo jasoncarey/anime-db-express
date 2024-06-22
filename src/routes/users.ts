@@ -63,3 +63,8 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/watchlist', async (req, res) => {});
+router.post('/:id/watchlist', async (req, res) => {});
+router.delete('/:id/watchlist/:animeId', async (req, res) => {});
+
+export default router

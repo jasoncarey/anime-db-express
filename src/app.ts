@@ -1,6 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import animeRoutes from './routes/anime'
+import userRoutes from './routes/users'
+import authRoutes from './routes/auth'
+import protectedRoutes from './routes/protected'
 
 export const app = express();
 
@@ -15,4 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/anime', animeRoutes);
+app.use('/users', userRoutes);
+app.use('/auth', authRoutes);
+//app.use('/protected', protectedRoutes);
 
