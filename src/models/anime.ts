@@ -1,4 +1,5 @@
 import { Table, Column, Model, HasMany, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import { UserAnime } from './UserAnime';
 
 @Table({
     tableName: 'Anime'
@@ -27,4 +28,7 @@ export class Anime extends Model<Anime> {
 
     @UpdatedAt
     updatedAt!: Date;
+
+    @HasMany(() => UserAnime)
+    userAnime!: UserAnime[];
 }

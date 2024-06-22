@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { User } from '../models/User'
 import { handleError } from "../utils/errorHandler";
+import { verifyUser } from "../utils/authUtils";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.get('/', async (_, res) => {
 router.post('/', async (req, res) => {
     try {
         const newUser = await User.create(req.body);
+        console.log('created user');
         res.status(201).json(newUser);
     } catch (error) {
         handleError(res, error);
@@ -24,6 +26,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
+        verifyUser(req, res);
         const user = await User.findByPk(req.params.id);
         if (user) {
             res.json(user);
@@ -37,6 +40,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
+        verifyUser(req, res);
         const user = await User.findByPk(req.params.id);
         if (user) {
             await user.update(req.body);
@@ -51,6 +55,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
+        verifyUser(req, res);
         const user = await User.findByPk(req.params.id);
         if (user) {
             await user.destroy();
